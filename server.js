@@ -26,117 +26,13 @@ app.use(express.static('img'));
 
 app.get('/', async (req, res) => {
    try {
-
-      res.render('public/landing')
+      res.render('public/index')
    }
    catch (err) {
       res.status(500);
       res.send(err.message);
    }
 })
-
-app.get('/Home', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-
-         .query('EXEC GetMovies;')
-
-      //console.table(result.recordset);
-
-      res.render('public/index', { project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-
-app.get('/Comedy', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-         .input('input_param', 1)
-         .query('EXEC GetGenre @input_param;');
-
-
-      //console.table(result.recordset);
-
-      res.render('public/index', { project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-app.get('/Action', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-         .input('input_param', 3)
-
-         .query('EXEC GetGenre @input_param;');
-
-      // console.table(result.recordset);
-
-      res.render('public/index', { project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-app.get('/Sci-Fi', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-      .input('input_param', 4)
-      .query('EXEC GetGenre @input_param;');
-
-      //console.table(result.recordset);
-
-      res.render('public/index', { project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-app.get('/Horror', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-      .input('input_param', 2)
-      .query('EXEC GetGenre @input_param;');
-
-      //console.table(result.recordset);
-
-      res.render('public/index', { project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-
-app.post('/', async (req, res) => {
-   try {
-      const pool = await poolPromise;
-      const result = await pool.request()
-         .input('input_param', sql.NVarChar, '%' + req.body.txtSearch + '%')
-         .query('EXEC MoviesSearchByText @input_param;');
-      //.query('SELECT lastName, favorites From Customer');
-
-      //console.table(result.recordset);
-
-      res.render('public/index', { search: true, project: result.recordset })
-   }
-   catch (err) {
-      res.status(500);
-      res.send(err.message);
-   }
-})
-
 
 // End routes
 
