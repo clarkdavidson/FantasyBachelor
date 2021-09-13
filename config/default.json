@@ -1,0 +1,7 @@
+{
+   "Settings":{
+      "dbConfig":{
+         "dbConnection":"mssql://clark.davidson:root@localhost/FantasyBachelor"
+      }
+   }
+}
